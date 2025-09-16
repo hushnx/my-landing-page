@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyAwesomeApp 설치 페이지</title>
+<style>
+  /* 기본 스타일 */
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { font-family: 'Noto Sans KR', sans-serif; background: #f0f2f5; display:flex; justify-content:center; align-items:center; min-height:100vh; padding:20px; }
+  .container { background:#fff; padding:30px 20px; border-radius:15px; max-width:400px; width:100%; text-align:center; box-shadow: 0 10px 25px rgba(0,0,0,0.1);}
+  
+  /* 로고 */
+  .logo { width:100px; margin-bottom:20px; }
+
+  /* 제목/소개 */
+  h1 { font-size:1.8em; margin-bottom:10px; }
+  p.intro { font-size:1em; color:#555; margin-bottom:25px; line-height:1.4; }
+
+  /* 버튼 */
+  .button { display:block; padding:15px 20px; margin:10px auto; font-size:1.1em; color:#fff; border-radius:10px; text-decoration:none; transition:0.2s; width:80%; max-width:300px;}
+  .android { background:#3ddc84; }
+  .android:hover { background:#36c174; }
+  .ios { background:#007aff; }
+  .ios:hover { background:#0064d6; }
+
+  /* 스크린샷 */
+  .screenshots { display:flex; justify-content:center; flex-wrap:wrap; margin-bottom:20px;}
+  .screenshots img { width:120px; margin:5px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+
+  /* QR 코드 */
+  .qr img { width:120px; margin-top:20px; }
+
+  /* 반응형 */
+  @media(max-width:400px){
+    .screenshots img { width:45%; }
+    .button { width:90%; }
+  }
+
+  /* 숨김 */
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 로고 -->
+  <img class="logo" src="images/logo.png" alt="앱 로고">
+
+  <!-- 제목 / 소개 -->
+  <h1>MyAwesomeApp</h1>
+  <p class="intro">
+    안드로이드와 아이폰에서 간편하게 다운로드 가능한 앱입니다.<br>
+    앱 설치 후 편리하게 이용해 보세요!
+  </p>
+
+  <!-- 앱 스크린샷 -->
+  <div class="screenshots">
+    <img src="https://example.com/screenshot1.png" alt="스크린샷1">
+    <img src="https://example.com/screenshot2.png" alt="스크린샷2">
+  </div>
+
+  <!-- PC용 다운로드 버튼 & QR -->
+  <div id="pcContent" class="hidden">
+    <p class="intro">모바일에서 QR코드를 스캔하거나 아래 버튼을 클릭하여 설치하세요!</p>
+    <a class="button android" href="https://play.google.com/store/apps/details?id=com.example.app" target="_blank">Android 다운로드</a>
+    <a class="button ios" href="https://apps.apple.com/kr/app/id123456789" target="_blank">iOS 다운로드</a>
+    <div class="qr">
+      <img src="https://example.com/qrcode.png" alt="QR코드">
+    </div>
+  </div>
+
+</div>
+
+<!-- OS 감지 후 모바일 리디렉션 -->
+<script>
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  if (/android/i.test(userAgent)) {
+    window.location.href = "https://play.google.com/store/apps/details?id=com.example.app";
+  } else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    window.location.href = "https://apps.apple.com/kr/app/id123456789";
+  } else {
+    // PC나 지원되지 않는 기기 → 안내 콘텐츠 표시
+    document.getElementById('pcContent').classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>
